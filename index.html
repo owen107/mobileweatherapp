@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	
+    <title>Lovely Weather</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="image/icon.png"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+
+  	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+    <script type="text/javascript" src="js/myjQuery.js"></script>
+
+</head>
+
+
+<body>
+
+<div data-role="page">
+
+    <div data-role="panel" id="left-panel" data-theme="a">
+       <ul data-theme="a" data-role="listview">
+         <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+         <li data-role="list-divider">Select a City</li>
+         <li><a href="#" class="city" data-rel="close">Current Location</a></li>	
+       	 <li><a href="#" class="city" data-rel="close">Chicago</a></li>
+       	 <li><a href="#" class="city" data-rel="close">Los Angeles</a></li>
+       	 <li><a href="#" class="city" data-rel="close">Miami</a></li>
+       	 <li><a href="#" class="city" data-rel="close">New York</a></li>
+       	 <li><a href="#" class="city" data-rel="close">San Francisco</a></li>
+       	 <li><a href="#" class="city" data-rel="close">Ann Arbor</a></li>
+         <li><a href="#" class="city" data-rel="close">Seattle</a></li>
+       </ul>
+    </div>
+
+	<div data-role="header" data-position="fixed" data-theme="a">
+		<h1>Lovely Weather</h1>
+		<a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
+
+	</div>
+	<div data-role="content" class="content">
+		    <h1 id="location">Current Locations</h1>
+        <p id="current_summary">Partly Cloudy</p>
+        <h2 id="current_temp" class="icon" data-icon="B">65&#176;F</h2>
+	</div>
+	
+</div>
+
+</body>
+</html>
