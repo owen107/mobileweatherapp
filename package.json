@@ -1,0 +1,18 @@
+{
+  "name": "lovelyweather",
+  "version": "0.0.1",
+  "description": "A Mobile Web Weather Channel Application using jQuery and Forecast.io API",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/owen107/mobileweatherapp.git"
+  },
+  "author": "Owen Xu",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-util": "^2.2.20",
+    "gulp-connect": "^2.0.6",
+    "gulp-if": "^1.2.4",
+    "gulp-uglify": "^0.3.1",
+    "gulp-minify-html": "^0.1.4"
+  }
+}
