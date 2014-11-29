@@ -27,7 +27,7 @@ var icons = { "clear-day" : "B",
            
            var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
 
-           var forecastURL = "https://api.forecast.io/forecast/9e9f12813a63c5ad1a19bacd10e776ad/"+latlng;
+           var forecastURL = "https://api.forecast.io/forecast/65f98f4cff0e84f5fec4ea1bdf393243/"+latlng;
 
            $.ajax({
               url: forecastURL,
@@ -38,6 +38,7 @@ var icons = { "clear-day" : "B",
           
                 currentWeather(result);
                 currentSpecific(result);
+                getHourlyWeather(result);
                 var time = getCurrentTime(result);
                 
               },
@@ -108,6 +109,34 @@ var icons = { "clear-day" : "B",
         return time;
       }
 
+      function getHourlyWeather(data) {
+         var result = data.hourly.data;
+         $('#hourly ul').html('');
+         
+         $.each(result, function(index) {
+             index++;
+             var output = '<li>';
+
+             var temp = Math.round(result[index].temperature) + "&#176;";
+             var icon_key = result[index].icon;
+             var t = new Date(result[index].time * 1000);
+             var hour = t.getHours();
+             if (hour === 0) {
+                hour = 12 + 'AM';
+             }  else if ( hour > 0 && hour < 12) {
+                hour += 'AM';
+             }  else if ( hour === 12) {
+                hour += 'PM'; 
+             }  else {
+                hour = (hour - 12) + 'PM';
+             }
+             output += '<span class="hour">' + hour + '</span>';
+             output += '<span class="icon" data-icon="' + icons[icon_key] + '"></span>';
+             output += '<span class="hour-temp">' + temp + '</span></li>';
+             $('#hourly ul').append(output);
+         });
+      }
+
        function loadCity(city){
           $("#location").html('<i class="fa fa-location-arrow"></i>' + city);
 
@@ -142,5 +171,10 @@ var icons = { "clear-day" : "B",
             $('#tap').bind('tap', function() {
                  $(this).css('display', 'none');
                  $('#current_info').css('display', 'block');
+            });
+
+            $('#hours_swipe').swipe({
+                threshold: 10,
+                // allowPageScroll: "horizontal"
             });
        });
