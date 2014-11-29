@@ -1,3 +1,6 @@
+/***************************
+Font Setting
+****************************/
 @font-face {
     font-family: 'MeteoconsRegular';
     src: url('../fonts/meteocons-webfont.eot');
@@ -9,6 +12,30 @@
     font-style: normal;
 
 }
+
+/***************************
+Listview Panel
+****************************/
+.fa-map-marker {
+  padding-right: 10px;
+}
+
+/***************************
+Page Header
+****************************/
+.ui-header #location i {
+    padding-right: 5px;
+}
+
+.ui-header #location span {
+   font-size: 0.5em;
+   line-height: 0;    
+}
+
+
+/***************************
+Current Content
+****************************/
 
 .icon:before {
 	font-family: 'MeteoconsRegular';
@@ -22,14 +49,60 @@
 
 #current_summary {
 	font-size: 0.9em;
-    font-weight: 700;
+    font-weight: 600;
+    margin: 0;
 }
 
-.content {
+.content #current_info {
 	text-align: center;
+}
+
+.precip {
+    margin: 5px 0 0;
+    font-size: 0.8em; 
+}
+
+.precip i {
+    margin-right: 5px;
+}
+
+.precip i.fa-long-arrow-up, .precip i.fa-long-arrow-down {
+    margin-left: 5px;
+}
+
+.precip i:before {
+    padding-right: 3px; 
 }
 
 h2 {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
 }
+
+#tap {
+    width: 40%;
+    max-width: 120px;
+    margin: 0 auto;
+    display: none;
+    line-height: 0.5em;
+    font-size: 0.7em;
+}
+
+#tap span {
+    float: right;
+}
+
+[data-icon*='G']:before {
+    margin-right: 0;
+}
+
+/***************************
+Forecast Content
+****************************/
+
+.ui-page-theme-a .ui-panel-wrapper .content .ui-content .forecast {
+    width: 95%;
+    border-color: black;
+}
+
+

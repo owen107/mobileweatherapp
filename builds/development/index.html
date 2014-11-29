@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="image/icon.png"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />    
-
   	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -24,31 +24,50 @@
 
     <div data-role="panel" id="left-panel" data-theme="b">
        <ul data-theme="b" data-role="listview">
-         <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+         <li data-icon="delete"><a href="#" data-rel="close">Back</a></li>
          <li data-role="list-divider">Select a City</li>
-         <li><a href="#" class="city" data-rel="close">Current Location</a></li>	
-       	 <li><a href="#" class="city" data-rel="close">Chicago</a></li>
-       	 <li><a href="#" class="city" data-rel="close">Los Angeles</a></li>
-       	 <li><a href="#" class="city" data-rel="close">Miami</a></li>
-       	 <li><a href="#" class="city" data-rel="close">New York</a></li>
-       	 <li><a href="#" class="city" data-rel="close">San Francisco</a></li>
-       	 <li><a href="#" class="city" data-rel="close">Ann Arbor</a></li>
-         <li><a href="#" class="city" data-rel="close">Seattle</a></li>
+         <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Current Location</a></li>	
+       	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Chicago</a></li>
+       	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Los Angeles</a></li>
+       	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Miami</a></li>
+       	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>New York</a></li>
+       	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>San Francisco</a></li>
+       	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Ann Arbor</a></li>
+         <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Seattle</a></li>
        </ul>
-    </div>
+    </div> <!-- Panel -->
 
-	<div data-role="header" data-position="fixed" data-theme="b">
-		<h1>Lovely Weather</h1>
-		<a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
+  	<div data-role="header" data-position="fixed" data-theme="b">
+  		<h1 id="location"></h1>
+  		<a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
+      <a href="#" data-icon="gear" data-role="button" data-iconpos="notext" class="ui-btn-right" data-iconshadow="false"></a>
+  	</div> <!-- Page Header -->
 
-	</div>
-	<div data-role="content" class="content">
-		    <h1 id="location">Current Locations</h1>
-        <p id="current_summary">Partly Cloudy</p>
-        <h2 id="current_temp" class="icon" data-icon="B">65&#176;F</h2>
-	</div>
+  	<div data-role="content" class="content">
+          <div id="current_info">
+            <h2 id="current_temp" class="icon" data-icon="B">65&#176;</h2>
+            <p id="current_summary" >Partly Cloudy</p>
+            <p class="precip">
+              <i class="pType fa fa-umbrella"></i>
+              <i class="fa fa-long-arrow-up"></i>
+              <i class="fa fa-long-arrow-down"></i>
+            </p>
+          </div>
+
+          <div id="tap">
+            <p id="current_humidity">Humidity: <span></span></p>
+            <p id="feel_like">Feel like: <span></span></p>
+            <p id="current_visibility">Visibility: <span></span></p>
+            <p id="current_dewpoint">Dew Point: <span></span></p>
+            <p id="current_pessure">Pessure: <span></span></p>
+            <p id="current_windspeed">Wind Speed: <span></span></p> 
+          </div>
+
+          <div class="forecast">
+          </div>
+  	</div> <!-- Page Content -->
 	
-</div>
+</div> <!-- Page -->
 
 </body>
 </html>
