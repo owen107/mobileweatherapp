@@ -115,12 +115,10 @@ var icons = { "clear-day" : "B",
          $('#hourly ul').html('');
 
          $.each(result, function(index) {
-             index++;
+             
              var output = '<li>';
 
              var temp = Math.round(result[index].temperature) + "&#176;";
-             console.log(result[index].temperature);
-             console.log(index);
              var icon_key = result[index].icon;
              var t = new Date(result[index].time * 1000);
              var hour = t.getHours();
@@ -133,7 +131,11 @@ var icons = { "clear-day" : "B",
              }  else {
                 hour = (hour - 12) + 'PM';
              }
-             output += '<span class="hour">' + hour + '</span>';
+             if (index == 0) {
+               output += '<span class="hour">Now</span>';
+             } else {
+               output += '<span class="hour">' + hour + '</span>';
+             }
              output += '<span class="icon" data-icon="' + icons[icon_key] + '"></span>';
              output += '<span class="hour-temp">' + temp + '</span></li>';
              $('#hourly ul').append(output);
@@ -142,7 +144,6 @@ var icons = { "clear-day" : "B",
 
       function getDailyWeather(data) {
          var result = data.daily.data;
-         console.log(result);
          var $hide = $('<div id="hide"></div>');
          $('#daily ul').html('');
          
@@ -177,6 +178,10 @@ var icons = { "clear-day" : "B",
              }             
          });
          $('#daily ul').append($hide);
+      }
+
+      function dailyWeatherDetails(data) {
+        
       }
 
        function loadCity(city){

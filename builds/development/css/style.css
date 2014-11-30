@@ -15,7 +15,7 @@ Font Setting
 /***************************
 Override jQuery Mobile CSS
 ****************************/
-#main { 
+.main { 
   background-color: #30ACFF; /* fallback color if gradients are not supported */
   background-image: -webkit-linear-gradient(top, #006EB8, #30ACFF); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
   background-image:    -moz-linear-gradient(top, #006EB8, #30ACFF); /* For Firefox (3.6 to 15) */
@@ -25,13 +25,17 @@ Override jQuery Mobile CSS
 
 }
 
-#page_header {
+.page_header {
     background: rgba(25,90,133, 0.5);
     border: none;
 }
 
 #left-panel a {
     color: #fff;
+}
+
+#bars {
+    color: rgba(25,90,133, 0);
 }
 
 /***************************
@@ -240,14 +244,182 @@ Forecast Content
     color: rgba(255, 255, 255, 0.7);
 }
 
+#extended span {
+    cursor: pointer;
+}
+
 #more {
     float: right;
     margin-right: 10px; 
     color: rgba(255, 255, 255, 1);
 }
 
+#ef {
+    color: rgba(255, 255, 255, 1);
+}
+
+#more a {
+    text-decoration: none;
+}
+
 .highlighted {
     color: rgba(255, 255, 255, 1);
+}
+
+/***************************
+Extended Forecast Content
+****************************/
+#backbtn {
+    color: rgba(25,90,133, 0);
+}
+
+.ui-btn-icon-left:after, 
+.ui-btn-icon-right:after, 
+.ui-btn-icon-top:after, 
+.ui-btn-icon-bottom:after, 
+.ui-btn-icon-notext:after {
+    background-color: transparent;
+}
+
+#title {
+    font-size: 0.9em;
+}
+
+.details {
+    margin-bottom: 10px;
+}
+
+.day_info {
+    width: 52%;
+    float: left;
+    padding: 5px 0 0 3%;
+}
+
+.sun_info {
+    padding-top: 3px;
+    width: 45%;
+    float: right;
+}
+
+.day_info span {
+    display: block;
+}
+
+.day_info span#weekday {
+   font-size: 0.85em;
+   padding-bottom: 2px; 
+}
+
+.day_info span#date {
+    font-size: 0.7em;
+    color: #33ADFF;
+    text-transform: uppercase;
+}
+
+.sun_info ul {
+    list-style: none;
+    margin: 0;
+}
+
+.sun_info ul li {
+    display: inline-block;
+    text-align: right; 
+}
+
+.sun_info ul li:nth-child(2) {
+    padding-left: 8px; 
+}
+
+.sun_info ul li span {
+    display: block;
+}
+
+.sun_info ul li#icon {
+    margin-bottom: 3px;
+}
+
+.sun_info ul li span.sunrise, .sun_info ul li span.sunset {
+    font-size: 0.5em;
+}
+
+.more_details {
+    background: rgba(0,0,0,0.2);
+    padding: 0 1%;
+}
+
+.more_details h1 {
+    font-size: 0.9em;
+    margin-top: 3px;
+    margin-bottom: 0;
+    padding: 8px 0 5px 5px;
+    font-weight: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.pattern {
+    width: 43%;
+    float: left;
+}
+
+.pattern h2 {
+    text-align: center;
+    font-size: 3em;
+    font-weight: 500;
+    padding-top: 16%;
+}
+
+.specific {
+    width: 55%;
+    float: right;
+}
+
+.specific ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.specific ul li {
+    display: block;
+    font-size: 0.68em;
+    padding: 6px 3px;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+    text-align: left;
+}
+
+.specific ul li:last-child {
+    border-bottom: none;
+}
+
+.specific ul li span {
+    font-size: 1.2em;
+    float: right;
+    padding-right: 6px;
+}
+
+.summary {
+    border-top: 1px dotted rgba(255, 255, 255, 0.3);
+}
+
+.summary h2 {
+    font-size: 0.9em;
+    font-weight: normal;
+    padding: 5px 0 5px 5px;
+    color: #33ADFF;
+}
+
+.summary p {
+    font-size: 0.7em;
+    margin: 0;
+    font-weight: normal;
+    padding-bottom: 10px; 
+    padding-left: 5px;
+}
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 
