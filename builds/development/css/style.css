@@ -57,6 +57,10 @@ Page Header
    line-height: 0;    
 }
 
+.active {
+    color: red;
+}
+
 
 /***************************
 Current Content
@@ -129,7 +133,7 @@ Forecast Content
 
 #forecast {
     max-width: 300px;
-    height: 500px;
+    height: 330px;
     margin: 20px auto 0;
     background-color: rgba(0,0,0,0.2);
 }
@@ -183,4 +187,67 @@ Forecast Content
 #hourly ul li span.hour-temp {
     font-size: 0.75em;
 }
+
+#daily {
+    width: 98%;
+    max-width: 294px;
+    margin: 0 auto;
+}
+
+#daily ul {
+   list-style: none;
+   margin: 10px 0;
+   padding: 0 3%;
+}
+
+#daily ul li {
+    display: block;
+    padding: 10px 0 5px; 
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+}
+
+#daily ul li:first-child {
+    padding-top: 0; 
+} 
+
+#daily ul li span.dayofweek {
+    font-size: 0.8em;
+    float: left;
+    width: 45%;
+}
+
+#daily ul li span.icon {
+    width: 35%;
+}
+
+#daily ul li span.maxMinTemp {
+    font-size: 0.8em;
+    float: right;  
+}
+
+#hide {
+    width: 100%;
+    padding: 10px 0 0;
+
+}
+
+#extended {
+    width: 98%;
+    padding: 0 3%;
+    margin: 0 auto;
+    font-size: 0.65em;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#more {
+    float: right;
+    margin-right: 10px; 
+    color: rgba(255, 255, 255, 1);
+}
+
+.highlighted {
+    color: rgba(255, 255, 255, 1);
+}
+
 

@@ -12,7 +12,6 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
 </head>
@@ -33,14 +32,13 @@
        	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>New York</a></li>
        	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>San Francisco</a></li>
        	 <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Ann Arbor</a></li>
-         <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker"></i>Seattle</a></li>
+         <li><a href="#" class="city" data-rel="close"><i class="fa fa-map-marker active"></i>Seattle</a></li>
        </ul>
     </div> <!-- Panel -->
 
   	<div data-role="header" data-position="fixed" id="page_header">
   		<h1 id="location"></h1>
   		<a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
-      <a href="#" data-icon="gear" data-role="button" data-iconpos="notext" class="ui-btn-right"></a>
   	</div> <!-- Page Header -->
 
   	<div data-role="content" class="content">
@@ -68,6 +66,14 @@
             <div id="hourly">
               <ul id="hours_swipe">
               </ul>
+            </div>
+            <div id="daily">
+               <ul>
+               </ul>
+            </div>
+            <div id="extended">
+               <span id="5days" class="highlighted">5d</span> / <span id="8days">8d</span>
+               <span id="more">Extended Forecast</span>
             </div>
           </div>
   	</div> <!-- Page Content -->

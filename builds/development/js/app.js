@@ -38,6 +38,7 @@ var icons = { "clear-day" : "B",
           
                 currentWeather(result);
                 currentSpecific(result);
+                getDailyWeather(result);
                 getHourlyWeather(result);
                 var time = getCurrentTime(result);
                 
@@ -112,12 +113,14 @@ var icons = { "clear-day" : "B",
       function getHourlyWeather(data) {
          var result = data.hourly.data;
          $('#hourly ul').html('');
-         
+
          $.each(result, function(index) {
              index++;
              var output = '<li>';
 
              var temp = Math.round(result[index].temperature) + "&#176;";
+             console.log(result[index].temperature);
+             console.log(index);
              var icon_key = result[index].icon;
              var t = new Date(result[index].time * 1000);
              var hour = t.getHours();
@@ -135,6 +138,45 @@ var icons = { "clear-day" : "B",
              output += '<span class="hour-temp">' + temp + '</span></li>';
              $('#hourly ul').append(output);
          });
+      }
+
+      function getDailyWeather(data) {
+         var result = data.daily.data;
+         console.log(result);
+         var $hide = $('<div id="hide"></div>');
+         $('#daily ul').html('');
+         
+         $.each(result, function(index) {
+             var output = '<li>';
+
+             var minTemp = Math.round(result[index].temperatureMin) + "&#176;";
+             var maxTemp = Math.round(result[index].temperatureMax) + "&#176;";
+             var icon_key = result[index].icon;
+             var t = new Date(result[index].time * 1000);
+             var day;
+             var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+             if (index == 0) {
+                day = 'Today';
+             } else {
+                day = days[t.getDay()];
+             }
+             output += '<span class="dayofweek">' + day + '</span>';
+             output += '<span class="icon" data-icon="' + icons[icon_key] + '"></span>';
+             if (minTemp > 9) {
+                output += '<span class="maxMinTemp">' + maxTemp + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + '</span></li>';
+             } else if ( minTemp >= 0 && minTemp <= 9) {
+                output += '<span class="maxMinTemp">' + maxTemp + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + '</span></li>';
+             } else {
+                output += '<span class="maxMinTemp">' + maxTemp + '&nbsp;&nbsp;&nbsp;' + minTemp + '</span></li>';
+             }
+
+             if(index < 5) {
+                $('#daily ul').append(output);
+             } else {
+                $hide.append(output);
+             }             
+         });
+         $('#daily ul').append($hide);
       }
 
        function loadCity(city){
@@ -160,7 +202,13 @@ var icons = { "clear-day" : "B",
             loadCity("Seattle");
 
             $("a.city").bind("click", function(){
-                   loadCity($(this).text());
+                   var city = $(this);
+                   var marker = $('#left-panel a').find('i');
+                   loadCity(city.text());
+                   if (marker.hasClass('active')) {
+                      marker.removeClass('active');
+                   } 
+                   city.find('i').addClass('active');                   
             });
 
             $('#current_info').bind('tap', function() {
@@ -173,8 +221,24 @@ var icons = { "clear-day" : "B",
                  $('#current_info').css('display', 'block');
             });
 
-            $('#hours_swipe').swipe({
-                threshold: 10,
-                // allowPageScroll: "horizontal"
+            $(window).load(function() {
+              $('#daily ul').find('#hide').hide();
             });
+
+            $('#8days').bind('tap', function() {
+                 $(this).prev().removeClass('highlighted');
+                 $(this).addClass('highlighted');
+                 $('#hide').slideDown('show');
+                 $('#forecast').animate({height: '440px'}, 400);
+            });
+
+            $('#5days').bind('tap', function() {
+                 $(this).next().removeClass('highlighted');
+                 $(this).addClass('highlighted');
+                 $('#forecast').animate({height: '330px'}, 400);
+                 $('#hide').slideUp('show');
+
+            });
+
+            
        });
