@@ -285,6 +285,10 @@ Extended Forecast Content
     font-size: 0.9em;
 }
 
+.dailyinfo {
+    background: rgba(0, 110, 184, 0.9);
+}
+
 .details {
     margin-bottom: 10px;
 }
