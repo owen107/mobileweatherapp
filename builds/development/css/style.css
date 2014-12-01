@@ -396,7 +396,7 @@ Extended Forecast Content
 }
 
 .specific ul li span {
-    font-size: 1.2em;
+    font-size: 1.1em;
     float: right;
     padding-right: 6px;
 }
@@ -426,4 +426,23 @@ Extended Forecast Content
   clear: both;
 }
 
+/***************************
+Covert Label
+****************************/
+
+#convert {
+    float: right;
+    padding: 5px 10px 0 0; 
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+#convert span {
+    cursor: pointer;
+}
+
+#convert .highlighted {
+    color: rgba(255, 255, 255, 1);
+}
 
