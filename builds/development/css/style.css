@@ -89,6 +89,7 @@ Current Content
 
 .content #current_info {
 	text-align: center;
+    cursor: pointer;
 }
 
 .precip {
@@ -121,6 +122,7 @@ h2 {
     line-height: 0.5em;
     font-size: 0.7em;
     margin-top: 19px;
+    cursor: pointer;
 }
 
 #tap span {

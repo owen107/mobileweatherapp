@@ -1,3 +1,4 @@
+// Create a javascript object that associates date icon with icon font 
 var icons = { "clear-day" : "B",
               "clear-night" : "C",
               "rain" : "R",
@@ -9,8 +10,9 @@ var icons = { "clear-day" : "B",
               "cloudy" : "Y",
               "partly-cloudy-day" : "H",
               "partly-cloudy-night" : "I"
-}; // Create a javascript object that associates date icon with icon font 
+}; 
 
+// Create a javascript object that associates city name with their coordinates
 var cities = {
                "new york"  : {coords: {latitude: 40.672060, longitude:-73.983898}},
                "los angeles"  : {coords: {latitude: 34.101422, longitude:-118.341224}},
@@ -19,15 +21,15 @@ var cities = {
                "miami"  : {coords: {latitude: 25.790176, longitude:-80.140133}},
                "ann arbor"  : {coords: {latitude: 42.287158, longitude:-83.719016}},
                "seattle"  : {coords: {latitude: 47.657453, longitude:-122.316437}},
-               "current location" : ""
-}; // Create a javascript object that associates city name with their coordinates
+               "current location" : {coords: {latitude: "", longitude:""}}
+}; 
 
 // Load weather data with AJAX request
 function loadweather(cityCoords, convert){
    
    var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
    var convTemp = convert;
-   var forecastURL = "https://api.forecast.io/forecast/65f98f4cff0e84f5fec4ea1bdf393243/" + latlng;
+   var forecastURL = "https://api.forecast.io/forecast/9e9f12813a63c5ad1a19bacd10e776ad/" + latlng;
 
    $.ajax({
       url: forecastURL,
@@ -54,6 +56,7 @@ function loadweather(cityCoords, convert){
            $('#hide').show();
         }   
         console.log('AJAX complete!');
+        console.log(cities);
       }
    });
 }
@@ -188,6 +191,7 @@ function convertHour(time, offset) {
      return hour;
 }
 
+// Modified the hour via time zone offset
 function hourModified(hour, offset) {
      if (offset === -6) {
          hour -= 1;
@@ -385,9 +389,9 @@ function dailyWeatherDetails(data, convert) {
 
 // Load weather data for selected city 
 function loadCity(city, convert){
-    $("#location").html('<i class="fa fa-location-arrow"></i>' + city);
 
     if (city.toLowerCase() == "current location") {
+       $("#location").html('<i class="fa fa-location-arrow"></i>');
        if (navigator.geolocation) 
             navigator.geolocation.getCurrentPosition(success,loadDefaultCity);
        else {
@@ -395,10 +399,40 @@ function loadCity(city, convert){
        }
     } else {
        loadweather(cities[city.toLowerCase()], convert);
+       $("#location").html('<i class="fa fa-location-arrow"></i>' + city);
     }
+
 }
 
+// HTML5 geolocation success callback function
 function success(position) {
+
+    cities["current location"].coords.latitude = position.coords.latitude;
+    cities["current location"].coords.longitude = position.coords.longitude;
+    console.log(cities["current location"].coords);
+    // Google Map API reverse geocoding
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            //Check result 0
+            var result = results[0];
+            console.log(results[0]);
+            //look for locality tag and administrative_area_level_1
+            var city = "";
+            var state = "";
+            for(var i = 0; i < result.address_components.length; i++) {
+                var ac = result.address_components[i];
+                if (ac.types.indexOf("locality") >= 0) city = ac.long_name;
+                if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+            }
+            //only report if we got Good Stuff
+            if (city != '' && state != '') {
+                $("#location").html('<i class="fa fa-location-arrow"></i>' + city + ", " + state);
+                cityState = city + ", " + state;
+            }
+        } 
+    });
     var id = $('#convert').find('.highlighted').attr('id');
     if (id === "celsius") {
        convert = true;
@@ -471,7 +505,9 @@ $(document).ready(function(){
            $(this).addClass('highlighted');
            var cityName = $('#location').text();
            var convertTemp = true;
-           if (cityName.toLowerCase() == 'currrent location') {
+
+           if (cityName.toLowerCase().indexOf(",") !== -1) {
+              loadweather(cities['current location'], convertTemp);
            } else {
               loadweather(cities[cityName.toLowerCase()], convertTemp);
            }
@@ -482,6 +518,11 @@ $(document).ready(function(){
            $(this).next('span').removeClass('highlighted');
            $(this).addClass('highlighted weila');
            var cityName = $('#location').text();
-           loadweather(cities[cityName.toLowerCase()]);
+           if (cityName.toLowerCase().indexOf(",") !== -1) {
+              loadweather(cities['current location']);
+           } else {
+              loadweather(cities[cityName.toLowerCase()]);
+           }
+           
       });     
 });
