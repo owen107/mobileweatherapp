@@ -448,7 +448,7 @@ function loadDefaultCity(){
 }
 
 $(document).ready(function(){
-      loadCity("Seattle");
+      loadCity("Current Location");
 
       // Load weather data for selected city and add active class to the link when tapping the city name
       $("a.city").bind("tap", function(){
@@ -468,12 +468,12 @@ $(document).ready(function(){
       });
 
       // Toggle weather info for current weather 
-      $('#current_info').bind('tap', function() {
+      $('#current_info').bind('click', function() {
            $(this).css('display', 'none');
            $('#tap').css('display', 'block');
       });
       
-      $('#tap').bind('tap', function() {
+      $('#tap').bind('click', function() {
            $(this).css('display', 'none');
            $('#current_info').css('display', 'block');
       });
