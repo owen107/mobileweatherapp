@@ -30,10 +30,6 @@ Override jQuery Mobile CSS
     border: none;
 }
 
-#left-panel a {
-    color: #fff;
-}
-
 #bars {
     color: rgba(25,90,133, 0);
 }
@@ -43,6 +39,30 @@ Listview Panel
 ****************************/
 .fa-map-marker {
   padding-right: 10px;
+}
+
+#selectedCity {
+    color: #33ADFF;
+    font-weight: normal;
+    border-color: #fff;
+}
+
+#left-panel a {
+    font-weight: normal;
+    color: #fff;
+}
+
+.ui-listview .ui-first-child {
+    padding: 8px;
+}
+
+.ui-listview>li.ui-first-child, 
+.ui-listview>li.ui-first-child>a.ui-btn {
+    border: none;
+}
+
+.ui-panel-inner {
+    background-color: rgba(25, 90, 133, 0.8);
 }
 
 /***************************

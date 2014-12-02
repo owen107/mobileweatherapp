@@ -231,16 +231,12 @@ function getDailyWeather(data, convert) {
 
          var minTemp = Math.round(result[index].temperatureMin);
          if (convert) {
-             minTemp = Math.round((minTemp - 32) * (5/9)) + "&#176;";
-         } else {
-             minTemp += "&#176;";
+             minTemp = Math.round((minTemp - 32) * (5/9));
          }
 
          var maxTemp = Math.round(result[index].temperatureMax);
          if (convert) {
-             maxTemp = Math.round((maxTemp - 32) * (5/9)) + "&#176;";
-         } else {
-             maxTemp += "&#176;";
+             maxTemp = Math.round((maxTemp - 32) * (5/9));
          }
 
          var icon_key = result[index].icon;
@@ -254,12 +250,15 @@ function getDailyWeather(data, convert) {
          }
          output += '<span class="dayofweek">' + day + '</span>';
          output += '<span class="icon" data-icon="' + icons[icon_key] + '"></span>';
-         if (minTemp > 9) {
-            output += '<span class="maxMinTemp temperature">' + maxTemp + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + '</span></li>';
-         } else if ( minTemp >= 0 && minTemp <= 9) {
-            output += '<span class="maxMinTemp temperature">' + maxTemp + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + '</span></li>';
+         if (minTemp >= 0 && minTemp <= 9 && maxTemp > 9) {
+            output += '<span class="maxMinTemp temperature">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
+            console.log("weila1");
+         } else if (minTemp >= 0 && minTemp <=9 && maxTemp >=0 && maxTemp <=9) {
+            output += '<span class="maxMinTemp temperature">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
+            console.log("weila2");
          } else {
-            output += '<span class="maxMinTemp temperature">' + maxTemp + '&nbsp;&nbsp;&nbsp;' + minTemp + '</span></li>';
+            output += '<span class="maxMinTemp temperature">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
+            console.log("weila3");
          }
 
          if(index < 5) {
