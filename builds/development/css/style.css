@@ -173,18 +173,23 @@ Forecast Content
 #hourly {
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    width: 98%;
+    width: 100%;
     max-width: 294px;
     max-height: 77px;
-    margin: 0 auto;
-    overflow: hidden;  
+    margin: 0 auto;    
+}
+
+#slider {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
 }
 
 #hourly ul {
     list-style: none;
-    padding-left: 1%;
+    padding-left: 0;
     margin: 10px 0;
-    width: 900%;
+    width: 900%; 
 }
 
 #hourly ul li {
@@ -305,6 +310,11 @@ Extended Forecast Content
 
 #title {
     font-size: 0.9em;
+}
+
+#days_extended {
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 .dailyinfo {
@@ -453,11 +463,17 @@ Covert Label
 ****************************/
 
 #convert {
-    float: right;
     padding: 5px 10px 0 0; 
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.8em;
     font-weight: normal;
+    margin: 0 auto;
+    width: 300px;
+}
+
+#convert div {
+    float: right;
+    padding-right: 10px;
 }
 
 #convert span {
@@ -467,4 +483,3 @@ Covert Label
 #convert .highlighted {
     color: rgba(255, 255, 255, 1);
 }
-

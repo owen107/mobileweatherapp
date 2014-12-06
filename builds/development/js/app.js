@@ -36,6 +36,11 @@ function loadweather(cityCoords, convert){
       jsonpCallback: 'jsonpCallback',
       contentType: "application/json",
       dataType: 'jsonp',
+      beforeSend: function() {
+         // Show the spinner before AJAX request
+         $.mobile.loading('show');
+         console.log("Loading!");
+      },
       success: function(result) {
         currentWeather(result, convTemp);
         currentSpecific(result, convTemp);
@@ -43,12 +48,12 @@ function loadweather(cityCoords, convert){
         dailyWeatherDetails(result, convTemp);
         getHourlyWeather(result, convTemp);
         console.log('AJAX success!');
+        $.mobile.loading('hide'); // hide the spinner when AJAX request succeed
       },
       error: function(e) {
         console.log(e.message);
       },
       complete: function(result) {
-
         $('#hide').hide(); // hide three days weather info when the AJAX request is complete
         
         // if show the weather info when the 8days label is highlighted
@@ -85,8 +90,8 @@ function currentWeather(data, convert) {
     } else {
         maxTemp += "&#176;";
     }
-    $('.fa-long-arrow-up').html(maxTemp);
-    $('.fa-long-arrow-down').html(minTemp);
+    $('.maxTemp').addClass('fa-long-arrow-up').html(maxTemp);
+    $('.minTemp').addClass('fa-long-arrow-down').html(minTemp);
 
     var precipType = data.currently.precipType;
     var precipProb = Math.round(data.currently.precipProbability * 100);
@@ -152,7 +157,7 @@ function getHourlyWeather(data, convert) {
 
      $.each(result, function(index) {
          
-         var output = '<li>';
+         var output = '<li class="slide">';
          var temp = Math.round(result[index].temperature);
          if (convert) {
              temp = Math.round((temp - 32) * (5/9)) + "&#176;";
@@ -251,13 +256,13 @@ function getDailyWeather(data, convert) {
          output += '<span class="dayofweek">' + day + '</span>';
          output += '<span class="icon" data-icon="' + icons[icon_key] + '"></span>';
          if (minTemp >= 0 && minTemp <= 9 && maxTemp > 9) {
-            output += '<span class="maxMinTemp temperature">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
+            output += '<span class="maxMinTemp">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
             console.log("weila1");
          } else if (minTemp >= 0 && minTemp <=9 && maxTemp >=0 && maxTemp <=9) {
-            output += '<span class="maxMinTemp temperature">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
+            output += '<span class="maxMinTemp">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
             console.log("weila2");
          } else {
-            output += '<span class="maxMinTemp temperature">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
+            output += '<span class="maxMinTemp">' + maxTemp + "&#176;" + '&nbsp;&nbsp;&nbsp;' + minTemp + "&#176;" + '</span></li>';
             console.log("weila3");
          }
 
@@ -374,11 +379,11 @@ function dailyWeatherDetails(data, convert) {
          }
 
          if (result[index].hasOwnProperty("precipType") && precipType == 'rain') {
-            output += 'Chance of rain ' + precipProb + '. The highest temperatue <span class="temperatue">' + maxTemp + '</span> at around ' + maxTempHour + ', and the lowest temperature <span class="temperatue">'+ minTemp +'</span> at around ' + minTempHour + '.</p>';
+            output += 'Chance of rain ' + precipProb + '. The highest temperatue <span>' + maxTemp + '</span> at around ' + maxTempHour + ', and the lowest temperature <span>'+ minTemp +'</span> at around ' + minTempHour + '.</p>';
          } else if (result[index].hasOwnProperty("precipType") && precipType == 'snow') {
-            output += 'Chance of snow ' + precipProb + '. The highest temperatue <span class="temperatue">' + maxTemp + '</span> at around ' + maxTempHour + ', and the lowest temperature <span class="temperatue">'+ minTemp +'</span> at round ' + minTempHour + '.</p>';
+            output += 'Chance of snow ' + precipProb + '. The highest temperatue <span>' + maxTemp + '</span> at around ' + maxTempHour + ', and the lowest temperature <span>'+ minTemp +'</span> at round ' + minTempHour + '.</p>';
          } else {
-            output += 'The highest temperatue <span class="temperatue">' + maxTemp + '</span> at around ' + maxTempHour + ', and the lowest temperature <span class="temperatue">'+ minTemp +'</span> at around ' + minTempHour + '.</p>';
+            output += 'The highest temperatue <span>' + maxTemp + '</span> at around ' + maxTempHour + ', and the lowest temperature <span>'+ minTemp +'</span> at around ' + minTempHour + '.</p>';
          }
          output += '</div></div></div>';
 
@@ -522,6 +527,44 @@ $(document).ready(function(){
            } else {
               loadweather(cities[cityName.toLowerCase()]);
            }
-           
-      });     
+      });
+
+
+        var slider = {
+  
+          // Not sure if keeping element collections like this
+          // together is useful or not.
+          el: {
+            slider: $("#slider"),
+            allSlides: $(".slide"),
+          },
+          
+          timing: 800,
+          slideWidth: 300, // could measure this
+         
+          // In this simple example, might just move the
+          // binding here to the init function
+          init: function() {
+            this.bindUIEvents();
+          },
+          
+          bindUIEvents: function() {
+            // You can either manually scroll...
+            this.el.slider.on("scroll", function(event) {
+              slider.moveSlidePosition(event);
+            });
+            // What would be cool is if it had touch
+            // events where you could swipe but it
+            // also kinda snapped into place.
+          },
+          
+          moveSlidePosition: function(event) {
+            // Magic Numbers =(
+            this.el.allSlides.css({
+              "background-position": $(event.target).scrollLeft()/6-100+ "px 0"
+            });  
+          }
+        };
+
+        slider.init();
 });

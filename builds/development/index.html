@@ -44,18 +44,18 @@
 
   	<div data-role="content" class="content">
           <div id="current_info">
-            <h2 id="current_temp" class="icon temperature" data-icon=""></h2>
+            <h2 id="current_temp" class="icon" data-icon=""></h2>
             <p id="current_summary"></p>
             <p class="precip">
-              <i class="pType fa fa-umbrella"></i>
-              <i class="fa fa-long-arrow-up temperature"></i>
-              <i class="fa fa-long-arrow-down temperature"></i>
+              <i class="pType umbrella"></i>
+              <i class="fa maxTemp"></i>
+              <i class="fa minTemp"></i>
             </p>
           </div>
 
           <div id="tap">
             <p id="current_humidity">Humidity: <span></span></p>
-            <p id="feel_like">Feel like: <span class="temperature"></span></p>
+            <p id="feel_like">Feel like: <span></span></p>
             <p id="current_visibility">Visibility: <span></span></p>
             <p id="current_dewpoint">Dew Point: <span></span></p>
             <p id="current_pessure">Pessure: <span></span></p>
@@ -65,8 +65,10 @@
           <div id="forecast">
               <h2>48 Hours Forecast</h2>
               <div id="hourly">
-                <ul id="hours_swipe">
-                </ul>
+                <div id="slider">
+                  <ul id="hours_swipe" class="holder">
+                  </ul>
+                </div>
               </div>
               <div id="daily">
                  <ul>
@@ -78,7 +80,9 @@
               </div>
           </div>
           <div id="convert">
-            <span id="fahrenheit" class="highlighted">F&#176;</span> / <span id="celsius">C&#176;</span>
+            <div>
+                <span id="fahrenheit" class="highlighted">F&#176;</span> / <span id="celsius">C&#176;</span>
+            </div>
           </div>
   	</div> <!-- Page Content -->
 	
